@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+//using TPUM;
 
 namespace UnitTestProject
 {
@@ -8,6 +9,7 @@ namespace UnitTestProject
         [TestMethod]
         public void TestMethod1()
         {
+            //Assert.AreEqual(6, Program.GetSix());
         }
     }
 }

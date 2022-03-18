@@ -10,5 +10,10 @@ namespace TPUM
         static void Main(string[] args)
         {
         }
+
+        static int GetSix()
+        {
+            return 6;
+        }
     }
 }
