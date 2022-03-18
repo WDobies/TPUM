@@ -5,13 +5,13 @@ using System.Text;
 
 namespace TPUM
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
         }
 
-        static int GetSix()
+        static public int GetSix()
         {
             return 6;
         }
