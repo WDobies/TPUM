@@ -3,10 +3,52 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="450" Width="600">
+    <Window.DataContext>
+        <vm:ShopViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+        <BooleanToVisibilityConverter x:Key="boolToVisibility"/>
+    </Window.Resources>
+    <StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Smartfony" Style="{StaticResource ButtonStyle}"/>
+            <Button Content="Laptopy" Style="{StaticResource ButtonStyle}"/>
+            <Button Content="Akcesoria" Style="{StaticResource ButtonStyle}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="500" Height="350">
+            <TextBlock Text="Koszyk" Background="LightGray" TextAlignment="Center" Width="50"/>
+            <ListBox x:Name="taskListBox" Margin="10,10,10,10"
+                 ItemsSource="{Binding Path=Products}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <!-- TODO Elementy Listy -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="100" Text="{Binding Path=Description, Mode=OneWay}" FontSize="20"/>
+                            <TextBlock Width="60" Text="{Binding Path=Price, Mode=OneWay}" FontSize="20"/>
+                            <TextBlock Width="250" Text="{Binding Path=Name, Mode=OneWay}" FontSize="12"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Margin" Value="3"/>
+                        <Setter Property="BorderBrush" Value="Black"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+        </StackPanel>
+    </StackPanel>
 </Window>
