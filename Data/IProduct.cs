@@ -2,11 +2,18 @@
 
 namespace Data
 {
+    public enum ProductType
+    {
+        Laptop,
+        Smartphone,
+        Accessories
+    }
     public interface IProduct
     {
-        string Name { get; set; }
-        float Price { get; set; }        
-        string Brand { get; set; }
+        string Name { get; }
+        float Price { get; }        
+        string Description { get; }
+        ProductType Type { get; }
 
         //TODO GUID?
         //TODO only get???

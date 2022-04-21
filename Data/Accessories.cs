@@ -2,15 +2,16 @@
 {
     class Accessories: IProduct
     {
-        public Accessories(string name, float price, string brand)
+        public Accessories(string name, float price, ProductType type, string description = "")
         {
             Name = name;
             Price = price;
-            Brand = brand;
+            Description = description;
         }
 
-        public string Name { get; set; }
-        public float Price { get; set; }
-        public string Brand { get; set; }
+        public string Name { get; }
+        public float Price { get; }
+        public string Description { get; }
+        public ProductType Type { get; }
     }
 }
