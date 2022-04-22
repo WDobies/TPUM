@@ -5,6 +5,7 @@
         public Accessories(string name, float price, ProductType type, string description = "")
         {
             Name = name;
+            Type = type;
             Price = price;
             Description = description;
         }
