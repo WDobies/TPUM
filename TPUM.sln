@@ -9,11 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestProject", "UnitTest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{CF6D9CA6-5E72-4F4D-9153-2EFDD7B2FAE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModel", "ViewModel\ViewModel.csproj", "{B954FF30-59B1-4872-A63D-AA53F4D0073C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModel", "ViewModel\ViewModel.csproj", "{B954FF30-59B1-4872-A63D-AA53F4D0073C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{247F7936-3C80-4EDE-BDC1-D159D383247D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "View", "View\View.csproj", "{AAB71A5B-BA64-4823-A458-B3B884F8D99D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "View", "View\View.csproj", "{AAB71A5B-BA64-4823-A458-B3B884F8D99D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{4E70494C-F041-48A8-AD27-240D1C06D063}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{AAB71A5B-BA64-4823-A458-B3B884F8D99D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAB71A5B-BA64-4823-A458-B3B884F8D99D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAB71A5B-BA64-4823-A458-B3B884F8D99D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E70494C-F041-48A8-AD27-240D1C06D063}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E70494C-F041-48A8-AD27-240D1C06D063}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E70494C-F041-48A8-AD27-240D1C06D063}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E70494C-F041-48A8-AD27-240D1C06D063}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,9 +5,14 @@ using System.Text;
 
 namespace Data
 {
-    class ProductsBase
+    public abstract class IProductsBase
     {
-        public List<IProduct> Products { get; }
+        public abstract List<IProduct> Products { get; }
+    }
+
+    class ProductsBase: IProductsBase
+    {
+        override public List<IProduct> Products { get; }
 
         ProductsBase()
         {
@@ -25,7 +30,6 @@ namespace Data
             Products.Add(new Accessories("Accessories 02", 35, ProductType.Accessories, "RT"));
             Products.Add(new Accessories("Accessories 03", 60, ProductType.Accessories, "XYZ"));
             Products.Add(new Accessories("Accessories 04", 90, ProductType.Accessories, "ABCD"));
-
         }
     }
 }
