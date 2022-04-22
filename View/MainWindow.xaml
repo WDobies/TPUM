@@ -23,8 +23,8 @@
     </Window.Resources>
     <StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="Smartfony" Style="{StaticResource ButtonStyle}" Command="{Binding Path=SetSmartphoneList}"/>
             <Button Content="Laptopy" Style="{StaticResource ButtonStyle}" Command="{Binding Path=SetLaptopList}"/>
+            <Button Content="Smartfony" Style="{StaticResource ButtonStyle}" Command="{Binding Path=SetSmartphoneList}"/>
             <Button Content="Akcesoria" Style="{StaticResource ButtonStyle}" Command="{Binding Path=SetAccessoeiesList}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="500" Height="350">
@@ -34,10 +34,14 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <!-- Elementy Listy -->
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Width="100" Text="{Binding Path=Description, Mode=OneWay}" FontSize="20"/>
-                            <TextBlock Width="60" Text="{Binding Path=Price, Mode=OneWay}" FontSize="20"/>
-                            <TextBlock Width="250" Text="{Binding Path=Name, Mode=OneWay}" FontSize="12"/>
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Width="350" Text="{Binding Path=Name, Mode=OneWay}" FontSize="18"/>
+                                <TextBlock Width="60" Text="{Binding Path=Price, Mode=OneWay}" FontSize="20"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Width="250" Text="{Binding Path=Description, Mode=OneWay}" FontSize="12"/>
+                            </StackPanel>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
