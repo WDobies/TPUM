@@ -19,10 +19,7 @@ namespace ViewModel
 
         public string Description
         {
-            get
-            {
-                return model.Description;
-            }
+            get => model.Description;
         }
 
         public string Name

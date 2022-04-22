@@ -19,9 +19,9 @@ namespace Logic
     {
         private IProductsBase productsBase;
 
-        Shop(IProductsBase productsBase)
+        public Shop()
         {
-            this.productsBase = productsBase;
+            this.productsBase = new ProductsBase();
         }
 
         public override List<Product> GetAllProducts()

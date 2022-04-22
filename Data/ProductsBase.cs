@@ -10,12 +10,14 @@ namespace Data
         public abstract List<IProduct> Products { get; }
     }
 
-    class ProductsBase: IProductsBase
+    public class ProductsBase: IProductsBase
     {
         override public List<IProduct> Products { get; }
 
-        ProductsBase()
+        public ProductsBase()
         {
+            Products = new List<IProduct>();
+
             Products.Add(new Laptop("Laptop 01", 2000, ProductType.Laptop, "Samsung"));
             Products.Add(new Laptop("Laptop 02", 1500, ProductType.Laptop, "Asus"));
             Products.Add(new Laptop("Laptop 03", 4000, ProductType.Laptop));
