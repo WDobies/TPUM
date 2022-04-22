@@ -8,6 +8,8 @@ namespace Model
 {
     public class Product
     {
+        
+
         public Product(string name, float price, string description = "")
         {
             Name = name;
