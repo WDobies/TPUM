@@ -11,16 +11,21 @@ namespace Logic
         public abstract List<Product> GetAllLaptops();
         public abstract List<Product> GetAllSmartphones();
         public abstract List<Product> GetAllAccessories();
+        public abstract void Buy(Guid id);
+        public abstract event EventHandler<CountChangedEventArgs> CountChanged;
+
     }
     public class Shop: IShop
     {
         private IDataManager dataManager;
         private IProductsBase productsBase;
 
+
         public Shop()
         {
             this.dataManager = IDataManager.Create();
             this.productsBase = dataManager.ProductsBase;
+            productsBase.CountChanged += OnCountChanged;
         }
 
         public override List<Product> GetAllProducts()
@@ -82,6 +87,19 @@ namespace Logic
                 }
             }
             return products;
+        }
+
+        public override event EventHandler<CountChangedEventArgs> CountChanged;
+
+        private void OnCountChanged(object sender, Data.CountChangedEventArgs e)
+        {
+            EventHandler<CountChangedEventArgs> handler = CountChanged;
+            handler?.Invoke(this, new CountChangedEventArgs(e.ID, e.Value));
+        }
+
+        public override void Buy(Guid id)
+        {
+            productsBase.Buy(id);
         }
     }
 }

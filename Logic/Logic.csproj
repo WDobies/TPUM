@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventsArgs.cs" />
     <Compile Include="LogicManager.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Shop.cs" />

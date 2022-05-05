@@ -14,6 +14,7 @@ namespace Model
             this.price = price;
             this.description = description;
             this.id = Guid.NewGuid();
+            this.count = 0;
         }
 
         public Product(string name, float price, Guid id, string description = "")
@@ -22,25 +23,36 @@ namespace Model
             this.price = price;
             this.description = description;
             this.id = id;
+            this.count = 0;
+        }
+
+        public Product(string name, float price, Guid id, int count, string description = "")
+        {
+            this.name = name;
+            this.price = price;
+            this.description = description;
+            this.id = id;
+            this.count = count;
         }
 
         private string name;
         private Guid id;
         private float price;
         private string description;
+        private int count;
 
-
-        public string Name { get => name; }
-        public Guid ID { get => id; }
-        public float Price 
+        public int Count 
         {
-            get => price;
+            get => count;
             set
             {
-                price = value;
-                onPropertyChanged(nameof(Price));
+                count = value;
+                onPropertyChanged(nameof(Count));
             }
         }
+        public string Name { get => name; }
+        public Guid ID { get => id; }
+        public float Price { get => price; }
         public string Description { get => description; }
     }
 }

@@ -30,6 +30,8 @@ namespace ViewModel
             get => model.Description;
         }
 
+        public int Count { get => model.Count; }
+
         public string Name
         {
             get
@@ -71,14 +73,12 @@ namespace ViewModel
                          new RelayCommand(
                              o =>
                              {
-                                 // TODO: 
-                                 // ShopViewModel.Buy(model.ID);
                                  EventHandler<EventArgs> handler = BuyEvent;
                                  handler?.Invoke(this, new EventArgs());
                              },
                              o =>
                              {
-                                 return true;// TODO: jeśli ilość == 0 to return false
+                                 return (Count > 0);
                              });
                 return buy;
             }

@@ -1,18 +1,22 @@
 ﻿using System.ComponentModel;
 
-public abstract class ObservedObject : INotifyPropertyChanged
+namespace ViewModel
 {
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    protected void onPropertyChanged(params string[] propertyNames)
+    public abstract class ObservedObject : INotifyPropertyChanged
     {
-        if(PropertyChanged != null)
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void onPropertyChanged(params string[] propertyNames)
         {
-            foreach (string propertyName in propertyNames)
+            if (PropertyChanged != null)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                foreach (string propertyName in propertyNames)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                }
             }
         }
     }
 }
+
 

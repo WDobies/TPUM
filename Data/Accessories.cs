@@ -17,7 +17,7 @@ namespace Data
         public string Name { get; }
         public float Price { get; }
         public string Description { get; }
-        public int Count { get; }
+        public int Count { get; set; }
         public ProductType Type { get; }
         public Guid ID { get; }
     }

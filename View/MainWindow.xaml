@@ -6,7 +6,7 @@
         xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="600">
+        Title="MainWindow" Height="450">
     <Window.DataContext>
         <vm:ShopViewModel/>
     </Window.DataContext>
@@ -39,7 +39,8 @@
                                 <TextBlock Width="60" Text="{Binding Path=Price, Mode=OneWay}" FontSize="20"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Width="350" Text="{Binding Path=Description, Mode=OneWay}" FontSize="12"/>
+                                <TextBlock Width="300" Text="{Binding Path=Description, Mode=OneWay}" FontSize="12"/>
+                                <TextBlock Width="50" Text="{Binding Path=Count, Mode=OneWay}" FontSize="12"/>
                                 <Button Content="Zamów" Width="60" Command="{Binding Path=Buy}"/>
                             </StackPanel>
                         </StackPanel>
