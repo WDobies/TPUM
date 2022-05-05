@@ -14,6 +14,8 @@ namespace Data
         string Name { get; }
         float Price { get; }        
         string Description { get; }
+        int Count { get; }
         ProductType Type { get; }
+        Guid ID { get; }
     }
 }

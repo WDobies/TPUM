@@ -3,17 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Logic;
 
 namespace Model
 {
     public class ShopModel
     {
-        private Logic.IShop shop = new Logic.Shop();
+        private ILogicManager logicManager;
+        private IShop shop;
 
         public List<Product> products { get; } = new List<Product>();
 
         public ShopModel()
         {
+            logicManager = ILogicManager.Create();
+            shop = logicManager.Shop;
+
             products.Add(new Product("xd", 10, "XYZ"));
             products.Add(new Product("aa", 20, "222"));
             products.Add(new Product("bb", 30, "333"));

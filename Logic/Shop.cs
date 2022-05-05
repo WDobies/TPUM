@@ -1,9 +1,6 @@
 ﻿using Data;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Logic
 {
@@ -17,11 +14,13 @@ namespace Logic
     }
     public class Shop: IShop
     {
+        private IDataManager dataManager;
         private IProductsBase productsBase;
 
         public Shop()
         {
-            this.productsBase = new ProductsBase();
+            this.dataManager = IDataManager.Create();
+            this.productsBase = dataManager.ProductsBase;
         }
 
         public override List<Product> GetAllProducts()
@@ -29,7 +28,7 @@ namespace Logic
             List<Product> products = new List<Product>();
             foreach (Data.IProduct item in productsBase.Products)
             {
-                products.Add(new Product(item.Name, item.Price, item.Description));
+                products.Add(new Product(item.Name, item.Price, item.Count, item.ID, item.Description));
             }
             return products;
         }
@@ -41,7 +40,7 @@ namespace Logic
             {
                 if((int) item.Type == type) 
                 {
-                    products.Add(new Product(item.Name, item.Price, item.Description));
+                    products.Add(new Product(item.Name, item.Price, item.Count, item.ID, item.Description));
                 }
             }
             return products;
@@ -53,7 +52,7 @@ namespace Logic
             {
                 if(item.Type == ProductType.Laptop) 
                 {
-                    products.Add(new Product(item.Name, item.Price, item.Description));
+                    products.Add(new Product(item.Name, item.Price, item.Count, item.ID, item.Description));
                 }
             }
             return products;
@@ -66,7 +65,7 @@ namespace Logic
             {
                 if (item.Type == ProductType.Smartphone)
                 {
-                    products.Add(new Product(item.Name, item.Price, item.Description));
+                    products.Add(new Product(item.Name, item.Price, item.Count, item.ID, item.Description));
                 }
             }
             return products;
@@ -79,7 +78,7 @@ namespace Logic
             {
                 if (item.Type == ProductType.Accessories)
                 {
-                    products.Add(new Product(item.Name, item.Price, item.Description));
+                    products.Add(new Product(item.Name, item.Price, item.Count, item.ID, item.Description));
                 }
             }
             return products;
