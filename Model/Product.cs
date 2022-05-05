@@ -6,19 +6,41 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class Product
+    public class Product : ObservedObject
     {
-        
-
         public Product(string name, float price, string description = "")
         {
-            Name = name;
-            Price = price;
-            Description = description;
+            this.name = name;
+            this.price = price;
+            this.description = description;
+            this.id = Guid.NewGuid();
         }
 
-        public string Name { get; }
-        public float Price { get; }
-        public string Description { get; }
+        public Product(string name, float price, Guid id, string description = "")
+        {
+            this.name = name;
+            this.price = price;
+            this.description = description;
+            this.id = id;
+        }
+
+        private string name;
+        private Guid id;
+        private float price;
+        private string description;
+
+
+        public string Name { get => name; }
+        public Guid ID { get => id; }
+        public float Price 
+        {
+            get => price;
+            set
+            {
+                price = value;
+                onPropertyChanged(nameof(Price));
+            }
+        }
+        public string Description { get => description; }
     }
 }

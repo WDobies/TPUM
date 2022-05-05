@@ -6,7 +6,7 @@ namespace ViewModel
 {
     public class ShopViewModel
     {
-        Model.ShopModel model = new Model.ShopModel();
+        Model.ShopModel model;
 
         int selectedListIndex = 0;
 
@@ -14,6 +14,7 @@ namespace ViewModel
 
         public ShopViewModel()
         {
+            model = new Model.ShopModel();
             model.ChangeProductList(selectedListIndex);
             copyModelAllProducts();
         }
@@ -23,6 +24,14 @@ namespace ViewModel
             Products.Clear();
             foreach (Model.Product product in model.products)
                 Products.Add(new ViewModel.Product(product));
+
+            foreach (Product product in Products)
+                product.BuyEvent += OnBuy;
+        }
+
+        private void OnBuy(object sender, EventArgs e)
+        {
+            model.Buy(((Product)sender).ID);
         }
 
         #region Commands

@@ -27,8 +27,7 @@
             <Button Content="Smartfony" Style="{StaticResource ButtonStyle}" Command="{Binding Path=SetSmartphoneList}"/>
             <Button Content="Akcesoria" Style="{StaticResource ButtonStyle}" Command="{Binding Path=SetAccessoeiesList}"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="500" Height="350">
-            <TextBlock Text="Koszyk" Background="LightGray" TextAlignment="Center" Width="50"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="350">
             <ListBox x:Name="taskListBox" Margin="10,10,10,10"
                  ItemsSource="{Binding Path=Products}">
                 <ListBox.ItemTemplate>
@@ -40,7 +39,8 @@
                                 <TextBlock Width="60" Text="{Binding Path=Price, Mode=OneWay}" FontSize="20"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Width="250" Text="{Binding Path=Description, Mode=OneWay}" FontSize="12"/>
+                                <TextBlock Width="350" Text="{Binding Path=Description, Mode=OneWay}" FontSize="12"/>
+                                <Button Content="Zamów" Width="60" Command="{Binding Path=Buy}"/>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>
