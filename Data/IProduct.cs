@@ -17,5 +17,6 @@ namespace Data
         int Count { get; set;}
         ProductType Type { get; }
         Guid ID { get; }
+        string GenerateDescription();
     }
 }

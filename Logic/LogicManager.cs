@@ -17,7 +17,6 @@ namespace Logic
     internal class LogicManager: ILogicManager
     {
         public override IShop Shop { get; }
-
         public LogicManager(IShop shop)
         {
             Shop = shop ?? new Shop();
