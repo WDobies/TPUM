@@ -6,20 +6,24 @@ namespace ViewModel
 {
     public class ShopViewModel
     {
-        Model.ShopModel model;
+        public Model.ShopModel model { get; }
 
-        int selectedListIndex = 0;
+        public int SelectedListIndex = 0;
 
         public ObservableCollection<Product> Products { get; } = new ObservableCollection<Product>();
 
         public ShopViewModel()
         {
             model = new Model.ShopModel();
-            model.ChangeProductList(selectedListIndex);
-            copyModelAllProducts();
+            model.ChangeProductList(SelectedListIndex);
+            CopyModelAllProducts();
+
+            SetLaptopList = new SetListCommand(this, 0);
+            SetSmartphoneList = new SetListCommand(this, 1);
+            SetAccessoeiesList = new SetListCommand(this, 2);
         }
 
-        private void copyModelAllProducts()
+        public void CopyModelAllProducts()
         {
             Products.Clear();
             foreach (Model.Product product in model.products)
@@ -29,84 +33,24 @@ namespace ViewModel
                 product.BuyEvent += OnBuy;
         }
 
+        public EventHandler<EventArgs> BuyMessage;
+
         private void OnBuy(object sender, EventArgs e)
         {
-            model.Buy(((Product)sender).ID);
+            if(model.Buy(((Product)sender).ID) == false)
+            {
+                EventHandler<EventArgs> handler = BuyMessage;
+                handler?.Invoke(this, new EventArgs());
+            }
         }
 
         #region Commands
 
-        private ICommand setLaptopList;
+        public ICommand SetLaptopList { get; }
 
-        public ICommand SetLaptopList
-        {
-            get
-            {
-                if (setLaptopList == null) setLaptopList =
-                         new RelayCommand(
-                             o =>
-                             {
-                                 selectedListIndex = 0;
-                                 model.ChangeProductList(selectedListIndex);
-                                 copyModelAllProducts();
-                             },
-                             o =>
-                             {
-                                 if (selectedListIndex == 0)
-                                     return false;
-                                 return true;
-                             });
-                return setLaptopList;
-            }
-        }
+        public ICommand SetSmartphoneList { get; }
 
-        private ICommand setSmartphoneList;
-
-        public ICommand SetSmartphoneList
-        {
-            get
-            {
-                if (setSmartphoneList == null) setSmartphoneList =
-                         new RelayCommand(
-                             o =>
-                             {
-                                 selectedListIndex = 1;
-                                 model.ChangeProductList(selectedListIndex);
-                                 copyModelAllProducts();
-                             },
-                             o =>
-                             {
-                                 if (selectedListIndex == 1)
-                                     return false;
-                                 return true;
-                             });
-                return setSmartphoneList;
-            }
-        }
-
-        private ICommand setAccessoeiesList;
-
-        public ICommand SetAccessoeiesList
-        {
-            get
-            {
-                if (setAccessoeiesList == null) setAccessoeiesList =
-                         new RelayCommand(
-                             o =>
-                             {
-                                 selectedListIndex = 2;
-                                 model.ChangeProductList(selectedListIndex);
-                                 copyModelAllProducts();
-                             },
-                             o => 
-                             {
-                                 if(selectedListIndex == 2)
-                                    return false;
-                                 return true;
-                             });
-                return setAccessoeiesList;
-            }
-        }
+        public ICommand SetAccessoeiesList { get; }
 
         #endregion
 

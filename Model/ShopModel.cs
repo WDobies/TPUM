@@ -38,9 +38,9 @@ namespace Model
             }
         }
 
-        public void Buy(Guid id)
+        public bool Buy(Guid id)
         {
-            shop.Buy(id);
+            return shop.Buy(id);
         }
 
         private void OnCountChanged(object sender, Logic.CountChangedEventArgs e)

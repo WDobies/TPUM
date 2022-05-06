@@ -1,6 +1,7 @@
 ﻿using Data;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Logic
 {
@@ -11,7 +12,7 @@ namespace Logic
         public abstract List<Product> GetAllLaptops();
         public abstract List<Product> GetAllSmartphones();
         public abstract List<Product> GetAllAccessories();
-        public abstract void Buy(Guid id);
+        public abstract bool Buy(Guid id);
         public abstract event EventHandler<CountChangedEventArgs> CountChanged;
 
     }
@@ -25,7 +26,6 @@ namespace Logic
         {
             this.dataManager = IDataManager.Create();
             this.productsBase = dataManager.ProductsBase;
-            productsBase.CountChanged += OnCountChanged;
         }
 
         public override List<Product> GetAllProducts()
@@ -91,15 +91,16 @@ namespace Logic
 
         public override event EventHandler<CountChangedEventArgs> CountChanged;
 
-        private void OnCountChanged(object sender, Data.CountChangedEventArgs e)
+        public override bool Buy(Guid id)
         {
-            EventHandler<CountChangedEventArgs> handler = CountChanged;
-            handler?.Invoke(this, new CountChangedEventArgs(e.ID, e.Value));
-        }
+            IProduct product = productsBase.Products.FirstOrDefault(x => x.ID == id);
 
-        public override void Buy(Guid id)
-        {
-            productsBase.Buy(id);
+            if (product.Count <= 0)
+                return false;
+                
+            EventHandler<CountChangedEventArgs> handler = CountChanged;
+            handler?.Invoke(this, new CountChangedEventArgs(id, product.Count));
+            return true;
         }
     }
 }

@@ -8,10 +8,6 @@ namespace Data
     public abstract class IProductsBase
     {
         public abstract List<IProduct> Products { get; }
-
-        public abstract void Buy(Guid id);
-
-        public abstract event EventHandler<CountChangedEventArgs> CountChanged;
     }
 
     internal class ProductsBase: IProductsBase
@@ -48,16 +44,6 @@ namespace Data
             Products.Add(new Accessories("Accessories 06", 35, 6, ProductType.Accessories, "LG"));
             Products.Add(new Accessories("Accessories 07", 60, 1, ProductType.Accessories, "LG"));
             Products.Add(new Accessories("Accessories 08", 90, 4, ProductType.Accessories, "ABCD"));
-        }
-
-        public override event EventHandler<CountChangedEventArgs> CountChanged;
-
-        public override void Buy(Guid id)
-        {
-            IProduct product = Products.FirstOrDefault(x => x.ID == id);
-            product.Count--;
-            EventHandler<CountChangedEventArgs> handler = CountChanged;
-            handler?.Invoke(this, new CountChangedEventArgs(id, product.Count));
         }
     }
 }
