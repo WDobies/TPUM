@@ -97,7 +97,8 @@ namespace Logic
 
             if (product.Count <= 0)
                 return false;
-                
+
+            product.Count--;
             EventHandler<CountChangedEventArgs> handler = CountChanged;
             handler?.Invoke(this, new CountChangedEventArgs(id, product.Count));
             return true;

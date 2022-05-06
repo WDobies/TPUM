@@ -33,15 +33,18 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <!-- Elementy Listy -->
-                        <StackPanel Orientation="Vertical">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Width="350" Text="{Binding Path=Name, Mode=OneWay}" FontSize="18"/>
-                                <TextBlock Width="60" Text="{Binding Path=Price, Mode=OneWay}" FontSize="20"/>
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Width="300" Margin="10,5,5,5" Text="{Binding Path=Name, Mode=OneWay}" FontSize="18"/>
+                                <TextBlock Width="300" Margin="30,5,5,5" Text="{Binding Path=Description, Mode=OneWay}" FontSize="12"/>
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Width="300" Text="{Binding Path=Description, Mode=OneWay}" FontSize="12"/>
-                                <TextBlock Width="50" Text="{Binding Path=Count, Mode=OneWay}" FontSize="12"/>
-                                <Button Content="Zamów" Width="60" Command="{Binding Path=Buy}"/>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Width="80" Text="{Binding Path=Price, Mode=OneWay}" FontSize="20"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                    <TextBlock Width="60" Text="Pozostało:" FontSize="12"/>
+                                    <TextBlock Width="20" Text="{Binding Path=Count, Mode=OneWay}" FontSize="12"/>
+                                </StackPanel>
+                                <Button Content="Zamów" Width="80" Command="{Binding Path=Buy}"/>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>
