@@ -10,26 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Logika interakcji dla klasy DialogWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class DialogWindow : Window, ViewModel.IDialogWindow
     {
-        public MainWindow()
+        public DialogWindow()
         {
             InitializeComponent();
-        }
-
-        protected override void OnInitialized(EventArgs e)
-        {
-            base.OnInitialized(e);
-            ViewModel.ShopViewModel _vm = (ViewModel.ShopViewModel)DataContext;
-            _vm.dialogService = new DialogService();
         }
     }
 }

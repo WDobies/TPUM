@@ -10,6 +10,10 @@ namespace ViewModel
 
         public int SelectedListIndex = 0;
 
+        private IDialogService _dialogService;
+
+        public IDialogService dialogService { get => _dialogService; set { _dialogService = value; }}
+
         public ObservableCollection<Product> Products { get; } = new ObservableCollection<Product>();
 
         public ShopViewModel()
@@ -21,6 +25,7 @@ namespace ViewModel
             SetLaptopList = new SetListCommand(this, 0);
             SetSmartphoneList = new SetListCommand(this, 1);
             SetAccessoeiesList = new SetListCommand(this, 2);
+            AlertCommand = new AlertCommand(this);
         }
 
         public void CopyModelAllProducts()
@@ -38,13 +43,12 @@ namespace ViewModel
         private void OnBuy(object sender, EventArgs e)
         {
             if(model.Buy(((Product)sender).ID) == false)
-            {
-                EventHandler<EventArgs> handler = BuyMessage;
-                handler?.Invoke(this, new EventArgs());
-            }
+                AlertCommand.Execute(this);
         }
 
         #region Commands
+
+        public ICommand AlertCommand { get; }
 
         public ICommand SetLaptopList { get; }
 

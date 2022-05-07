@@ -16,20 +16,13 @@ using System.Windows.Shapes;
 namespace View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Logika interakcji dla klasy AlertDialogView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AlertDialogView : UserControl
     {
-        public MainWindow()
+        public AlertDialogView()
         {
             InitializeComponent();
-        }
-
-        protected override void OnInitialized(EventArgs e)
-        {
-            base.OnInitialized(e);
-            ViewModel.ShopViewModel _vm = (ViewModel.ShopViewModel)DataContext;
-            _vm.dialogService = new DialogService();
         }
     }
 }

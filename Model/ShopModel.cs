@@ -46,7 +46,7 @@ namespace Model
         private void OnCountChanged(object sender, Logic.CountChangedEventArgs e)
         {
             Product product = products.FirstOrDefault(x => x.ID == e.ID);
-            product.Count--;
+            product.Count = e.Value;
         }
 
         public Product this[int index]
