@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EventsArgs.cs" />
+    <Compile Include="ModelManager.cs" />
     <Compile Include="ObservedObject.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="ShopModel.cs" />

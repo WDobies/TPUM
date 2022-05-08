@@ -6,7 +6,7 @@ namespace ViewModel
 {
     public class ShopViewModel
     {
-        public Model.ShopModel model { get; }
+        public Model.IShopModel model { get; }
 
         public int SelectedListIndex = 0;
 
@@ -18,7 +18,9 @@ namespace ViewModel
 
         public ShopViewModel()
         {
-            model = new Model.ShopModel();
+            Model.IModelManager modelManager = Model.IModelManager.Create();
+            model= modelManager.ShopModel;
+
             model.ChangeProductList(SelectedListIndex);
             CopyModelAllProducts();
 
@@ -31,7 +33,7 @@ namespace ViewModel
         public void CopyModelAllProducts()
         {
             Products.Clear();
-            foreach (Model.Product product in model.products)
+            foreach (Model.Product product in model.Products)
                 Products.Add(new ViewModel.Product(product));
 
             foreach (Product product in Products)
