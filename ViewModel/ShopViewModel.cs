@@ -33,7 +33,7 @@ namespace ViewModel
         public void CopyModelAllProducts()
         {
             Products.Clear();
-            foreach (Model.Product product in model.Products)
+            foreach (Model.IProduct product in model.Products)
                 Products.Add(new ViewModel.Product(product));
 
             foreach (Product product in Products)

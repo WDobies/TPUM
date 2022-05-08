@@ -9,7 +9,7 @@ namespace Model
 {
     public abstract class IShopModel
     {
-        public abstract List<Product> Products { get; }
+        public abstract List<IProduct> Products { get; }
         public abstract void ChangeProductList(int productType);
         public abstract bool Buy(Guid id);
     }
@@ -19,7 +19,7 @@ namespace Model
         private ILogicManager logicManager;
         private IShop shop;
 
-        public override List<Product> Products { get; }
+        public override List<IProduct> Products { get; }
 
         public ShopModel()
         {
@@ -27,7 +27,7 @@ namespace Model
             shop = logicManager.Shop;
             shop.CountChanged += OnCountChanged;
 
-            Products = new List<Product>();
+            Products = new List<IProduct>();
         }
 
         public override void ChangeProductList(int productType)
@@ -48,7 +48,7 @@ namespace Model
 
         private void OnCountChanged(object sender, Logic.CountChangedEventArgs e)
         {
-            Product product = Products.FirstOrDefault(x => x.ID == e.ID);
+            IProduct product = Products.FirstOrDefault(x => x.ID == e.ID);
             product.Count = e.Value;
         }
     }

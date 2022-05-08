@@ -10,9 +10,9 @@ namespace ViewModel
 {
     public class Product : ObservedObject
     {
-        private Model.Product model;
+        private Model.IProduct model;
 
-        public Product(Model.Product product)
+        public Product(Model.IProduct product)
         {
             model = product;
             model.PropertyChanged += Model_PropertyChanged;

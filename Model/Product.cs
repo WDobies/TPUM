@@ -6,26 +6,21 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class Product : ObservedObject
+    public abstract class IProduct : ObservedObject
     {
-        public Product(string name, float price, string description = "")
+        public abstract int Count
         {
-            this.name = name;
-            this.price = price;
-            this.description = description;
-            this.id = Guid.NewGuid();
-            this.count = 0;
+            get;
+            internal set;
         }
+        public abstract string Name { get; }
+        public abstract Guid ID { get; }
+        public abstract float Price { get; }
+        public abstract string Description { get; }
+    }
 
-        public Product(string name, float price, Guid id, string description = "")
-        {
-            this.name = name;
-            this.price = price;
-            this.description = description;
-            this.id = id;
-            this.count = 0;
-        }
-
+    internal class Product : IProduct
+    {
         public Product(string name, float price, Guid id, int count, string description = "")
         {
             this.name = name;
@@ -41,18 +36,18 @@ namespace Model
         private string description;
         private int count;
 
-        public int Count 
+        public override int Count 
         {
             get => count;
-            set
+            internal set
             {
                 count = value;
                 onPropertyChanged(nameof(Count));
             }
         }
-        public string Name { get => name; }
-        public Guid ID { get => id; }
-        public float Price { get => price; }
-        public string Description { get => description; }
+        public override string Name { get => name; }
+        public override Guid ID { get => id; }
+        public override float Price { get => price; }
+        public override string Description { get => description; }
     }
 }
