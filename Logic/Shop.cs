@@ -7,11 +7,11 @@ namespace Logic
 {
     public abstract class IShop
     {
-        public abstract List<Product> GetAllProducts();
-        public abstract List<Product> GetProductsOfType(int type);
-        public abstract List<Product> GetAllLaptops();
-        public abstract List<Product> GetAllSmartphones();
-        public abstract List<Product> GetAllAccessories();
+        public abstract List<IProduct> GetAllProducts();
+        public abstract List<IProduct> GetProductsOfType(int type);
+        public abstract List<IProduct> GetAllLaptops();
+        public abstract List<IProduct> GetAllSmartphones();
+        public abstract List<IProduct> GetAllAccessories();
         public abstract bool Buy(Guid id);
         public abstract event EventHandler<CountChangedEventArgs> CountChanged;
 
@@ -28,9 +28,9 @@ namespace Logic
             this.productsBase = dataManager.ProductsBase;
         }
 
-        public override List<Product> GetAllProducts()
+        public override List<IProduct> GetAllProducts()
         {
-            List<Product> products = new List<Product>();
+            List<IProduct> products = new List<IProduct>();
             foreach (Data.IProduct item in productsBase.Products)
             {
                 products.Add(new Product(item.Name, item.Price, item.Count, item.ID, item.Description));
@@ -38,9 +38,9 @@ namespace Logic
             return products;
         }
 
-        public override List<Product> GetProductsOfType(int type)
+        public override List<IProduct> GetProductsOfType(int type)
         {
-            List<Product> products = new List<Product>();
+            List<IProduct> products = new List<IProduct>();
             foreach (Data.IProduct item in productsBase.Products)
             {
                 if((int) item.Type == type) 
@@ -50,9 +50,9 @@ namespace Logic
             }
             return products;
         }
-        public override List<Product> GetAllLaptops()
+        public override List<IProduct> GetAllLaptops()
         {
-            List<Product> products = new List<Product>();
+            List<IProduct> products = new List<IProduct>();
             foreach (Data.IProduct item in productsBase.Products)
             {
                 if(item.Type == ProductType.Laptop) 
@@ -63,9 +63,9 @@ namespace Logic
             return products;
         }
 
-        public override List<Product> GetAllSmartphones()
+        public override List<IProduct> GetAllSmartphones()
         {
-            List<Product> products = new List<Product>();
+            List<IProduct> products = new List<IProduct>();
             foreach (Data.IProduct item in productsBase.Products)
             {
                 if (item.Type == ProductType.Smartphone)
@@ -76,9 +76,9 @@ namespace Logic
             return products;
         }
 
-        public override List<Product> GetAllAccessories()
+        public override List<IProduct> GetAllAccessories()
         {
-            List<Product> products = new List<Product>();
+            List<IProduct> products = new List<IProduct>();
             foreach (Data.IProduct item in productsBase.Products)
             {
                 if (item.Type == ProductType.Accessories)
@@ -93,7 +93,7 @@ namespace Logic
 
         public override bool Buy(Guid id)
         {
-            IProduct product = productsBase.Products.FirstOrDefault(x => x.ID == id);
+            Data.IProduct product = productsBase.Products.FirstOrDefault(x => x.ID == id);
 
             if (product.Count <= 0)
                 return false;

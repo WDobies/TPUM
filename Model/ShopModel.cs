@@ -34,8 +34,8 @@ namespace Model
         {
             Products.Clear();
             
-            List<Logic.Product> newPreoducts =  shop.GetProductsOfType(productType);
-            foreach (Logic.Product item in newPreoducts)
+            List<Logic.IProduct> newPreoducts =  shop.GetProductsOfType(productType);
+            foreach (Logic.IProduct item in newPreoducts)
             {
                 Products.Add(new Product(item.Name, item.Price, item.ID, item.Count, item.Description));
             }

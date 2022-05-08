@@ -2,7 +2,15 @@
 
 namespace Logic
 {
-    public class Product
+    public abstract class IProduct
+    {
+        abstract public string Name { get; }
+        abstract public float Price { get; }
+        abstract public string Description { get; }
+        abstract public int Count { get; }
+        abstract public Guid ID { get; }
+    }
+    internal class Product: IProduct
     {
         public Product(string name, float price, int count, Guid id, string description = "")
         {
@@ -13,10 +21,10 @@ namespace Logic
             ID = id;
         }
 
-        public string Name { get; }
-        public float Price { get; }
-        public string Description { get; }
-        public int Count { get; }
-        public Guid ID { get; }
+        override public string Name { get; }
+        override public float Price { get; }
+        override public string Description { get; }
+        override public int Count { get; }
+        override public Guid ID { get; }
     }
 }
