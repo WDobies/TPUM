@@ -1,12 +1,27 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace ServerPresentation
 {
     class Program
     {
-        static void Main(string[] args)
+        static WebSocketConnection server = null;
+        static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Uri uri = new Uri("ws://localhost:9696");
+            Task server = Task.Run(async () => await WebSocketServer.Server(uri.Port,
+                _ws =>
+                {
+                    Program.server = _ws; Program.server.onMessage = (data) =>
+                    {
+                        Console.WriteLine("\n recived:");
+                        Console.WriteLine(data.ToString());
+                        
+                    };
+                }));
+
+
+            Console.ReadKey();
         }
     }
 }
