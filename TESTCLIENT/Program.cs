@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Data;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace TESTCLIENT
 {
@@ -14,7 +17,7 @@ namespace TESTCLIENT
         {
             await connect();
 
-            send("Smth from client");
+            send("test");
 
             Console.ReadKey();
         }

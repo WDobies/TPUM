@@ -9,9 +9,7 @@ namespace ServerLogic
     {
         public abstract List<IProduct> GetAllProducts();
         public abstract List<IProduct> GetProductsOfType(int type);
-        public abstract List<IProduct> GetAllLaptops();
-        public abstract List<IProduct> GetAllSmartphones();
-        public abstract List<IProduct> GetAllAccessories();
+        public abstract string ParseAllProductsToXML();
         public abstract bool Buy(Guid id);
         public abstract event EventHandler<CountChangedEventArgs> CountChanged;
 
@@ -50,44 +48,7 @@ namespace ServerLogic
             }
             return products;
         }
-        public override List<IProduct> GetAllLaptops()
-        {
-            List<IProduct> products = new List<IProduct>();
-            foreach (ServerData.IProduct item in productsBase.Products)
-            {
-                if(item.Type == ProductType.Laptop) 
-                {
-                    products.Add(new Product(item.Name, item.Price, item.Count, item.ID, item.Description));
-                }
-            }
-            return products;
-        }
 
-        public override List<IProduct> GetAllSmartphones()
-        {
-            List<IProduct> products = new List<IProduct>();
-            foreach (ServerData.IProduct item in productsBase.Products)
-            {
-                if (item.Type == ProductType.Smartphone)
-                {
-                    products.Add(new Product(item.Name, item.Price, item.Count, item.ID, item.Description));
-                }
-            }
-            return products;
-        }
-
-        public override List<IProduct> GetAllAccessories()
-        {
-            List<IProduct> products = new List<IProduct>();
-            foreach (ServerData.IProduct item in productsBase.Products)
-            {
-                if (item.Type == ProductType.Accessories)
-                {
-                    products.Add(new Product(item.Name, item.Price, item.Count, item.ID, item.Description));
-                }
-            }
-            return products;
-        }
 
         public override event EventHandler<CountChangedEventArgs> CountChanged;
 
@@ -102,6 +63,19 @@ namespace ServerLogic
             EventHandler<CountChangedEventArgs> handler = CountChanged;
             handler?.Invoke(this, new CountChangedEventArgs(id, product.Count));
             return true;
+        }
+
+        public override string ParseAllProductsToXML()
+        {
+            string xml = "";
+            Serializer serializer = new Serializer();
+            foreach (IProduct item in GetAllProducts())
+            {
+                ProductXML p = new ProductXML(item.Name, item.Price, item.Count, item.ID, item.Description);
+                serializer.products.Add(p);
+            }
+            xml += serializer.ParseToXML();
+            return xml;
         }
     }
 }
