@@ -8,13 +8,10 @@ namespace Logic
     public abstract class IShop
     {
         public abstract List<IProduct> GetAllProducts();
-        public abstract List<IProduct> GetProductsOfType(int type);
-        public abstract List<IProduct> GetAllLaptops();
-        public abstract List<IProduct> GetAllSmartphones();
-        public abstract List<IProduct> GetAllAccessories();
+        public abstract void GetProductsOfType(int type);
         public abstract bool Buy(Guid id);
         public abstract event EventHandler<CountChangedEventArgs> CountChanged;
-
+        public abstract event EventHandler<NewListEventArgs> NewList;
     }
     public class Shop: IShop
     {
@@ -26,6 +23,8 @@ namespace Logic
         {
             this.dataManager = IDataManager.Create();
             this.productsBase = dataManager.ProductsBase;
+
+            dataManager.NewList += OnNewList;
         }
 
         public override List<IProduct> GetAllProducts()
@@ -38,55 +37,11 @@ namespace Logic
             return products;
         }
 
-        public override List<IProduct> GetProductsOfType(int type)
+        public override void GetProductsOfType(int type)
         {
-            List<IProduct> products = new List<IProduct>();
-            foreach (Data.IProduct item in productsBase.Products)
-            {
-                if((int) item.Type == type) 
-                {
-                    products.Add(new Product(item.Name, item.Price, item.Count, item.ID, item.Description));
-                }
-            }
-            return products;
-        }
-        public override List<IProduct> GetAllLaptops()
-        {
-            List<IProduct> products = new List<IProduct>();
-            foreach (Data.IProduct item in productsBase.Products)
-            {
-                if(item.Type == ProductType.Laptop) 
-                {
-                    products.Add(new Product(item.Name, item.Price, item.Count, item.ID, item.Description));
-                }
-            }
-            return products;
-        }
-
-        public override List<IProduct> GetAllSmartphones()
-        {
-            List<IProduct> products = new List<IProduct>();
-            foreach (Data.IProduct item in productsBase.Products)
-            {
-                if (item.Type == ProductType.Smartphone)
-                {
-                    products.Add(new Product(item.Name, item.Price, item.Count, item.ID, item.Description));
-                }
-            }
-            return products;
-        }
-
-        public override List<IProduct> GetAllAccessories()
-        {
-            List<IProduct> products = new List<IProduct>();
-            foreach (Data.IProduct item in productsBase.Products)
-            {
-                if (item.Type == ProductType.Accessories)
-                {
-                    products.Add(new Product(item.Name, item.Price, item.Count, item.ID, item.Description));
-                }
-            }
-            return products;
+            // TEMP
+            dataManager.XML_ToNewList("TEMP");
+            // TODO: SendAsync("GetProductsOfType+type")
         }
 
         public override event EventHandler<CountChangedEventArgs> CountChanged;
@@ -102,6 +57,20 @@ namespace Logic
             EventHandler<CountChangedEventArgs> handler = CountChanged;
             handler?.Invoke(this, new CountChangedEventArgs(id, product.Count));
             return true;
+        }
+
+        public override event EventHandler<NewListEventArgs> NewList;
+
+        private void OnNewList(object sender, Data.NewListEventArgs e)
+        {
+            List<IProduct> products = new List<IProduct>();
+            foreach (Data.IProduct item in e.Products)
+            {
+                products.Add(new Product(item.Name, item.Price, item.Count, item.ID, item.Description));
+            }
+
+            EventHandler<NewListEventArgs> handler = NewList;
+            handler?.Invoke(this, new NewListEventArgs(products));
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Model
         public abstract List<IProduct> Products { get; }
         public abstract void ChangeProductList(int productType);
         public abstract bool Buy(Guid id);
+        public abstract event EventHandler<NewListEventArgs> NewList;
     }
 
     internal class ShopModel : IShopModel 
@@ -26,19 +27,14 @@ namespace Model
             logicManager = ILogicManager.Create();
             shop = logicManager.Shop;
             shop.CountChanged += OnCountChanged;
+            shop.NewList += OnNewList;
 
             Products = new List<IProduct>();
         }
 
         public override void ChangeProductList(int productType)
         {
-            Products.Clear();
-            
-            List<Logic.IProduct> newPreoducts =  shop.GetProductsOfType(productType);
-            foreach (Logic.IProduct item in newPreoducts)
-            {
-                Products.Add(new Product(item.Name, item.Price, item.ID, item.Count, item.Description));
-            }
+            shop.GetProductsOfType(productType);
         }
 
         public override bool Buy(Guid id)
@@ -50,6 +46,21 @@ namespace Model
         {
             IProduct product = Products.FirstOrDefault(x => x.ID == e.ID);
             product.Count = e.Value;
+        }
+
+        public override event EventHandler<NewListEventArgs> NewList;
+
+        private void OnNewList(object sender, Logic.NewListEventArgs e)
+        {
+            Products.Clear();
+
+            foreach (Logic.IProduct item in e.Products)
+            {
+                Products.Add(new Product(item.Name, item.Price, item.ID, item.Count, item.Description));
+            }
+
+            EventHandler<NewListEventArgs> handler = NewList;
+            handler?.Invoke(this, new NewListEventArgs());
         }
     }
 }

@@ -16,4 +16,10 @@ namespace Model
         public Guid ID { get; }
         public int Value { get; }
     }
+
+    public class NewListEventArgs : EventArgs
+    {
+        public NewListEventArgs()
+        { }
+    }
 }

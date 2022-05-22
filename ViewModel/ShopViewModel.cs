@@ -24,10 +24,17 @@ namespace ViewModel
             model.ChangeProductList(SelectedListIndex);
             CopyModelAllProducts();
 
+            model.NewList += OnNewList;
+
             SetLaptopList = new SetListCommand(this, 0);
             SetSmartphoneList = new SetListCommand(this, 1);
             SetAccessoeiesList = new SetListCommand(this, 2);
             AlertCommand = new AlertCommand(this);
+        }
+
+        private void OnNewList(object sender, Model.NewListEventArgs e)
+        {
+            CopyModelAllProducts();
         }
 
         public void CopyModelAllProducts()

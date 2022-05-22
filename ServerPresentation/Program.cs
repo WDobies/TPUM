@@ -1,5 +1,6 @@
 ﻿using ServerLogic;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ServerPresentation
@@ -29,7 +30,12 @@ namespace ServerPresentation
                     {
                         //Console.WriteLine("\nrecived:" + parseTEST);
                         Console.WriteLine(data.ToString());
-                        
+
+                        if (data == "GetProductsOfType0")
+                        {
+                            List<IProduct> products = logicManager.Shop.GetProductsOfType(0);
+                            // TODO: SendAsync("products as XML")
+                        }
                     };
                 }));
 
