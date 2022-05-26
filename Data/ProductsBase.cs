@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Data
 {
@@ -12,10 +13,13 @@ namespace Data
 
     internal class ProductsBase: IProductsBase
     {
+        WebSocketConnection _wclient = null;
+        
         override public List<IProduct> Products { get; }
 
         public ProductsBase()
         {
+            
             Products = new List<IProduct>();
 
             Products.Add(new Laptop("Laptop 01", 2000, 55, ProductType.Laptop, 256, 2));
@@ -45,5 +49,13 @@ namespace Data
             Products.Add(new Accessories("Accessories 07", 60, 1, ProductType.Accessories, "LG"));
             Products.Add(new Accessories("Accessories 08", 90, 4, ProductType.Accessories, "ABCD"));
         }
+      //  public async Task connect()
+      //  {
+      //      Uri uri = new Uri("ws://localhost:6966");
+      //      _wclient = await WebSocketClient.Connect(uri, message => Console.WriteLine(message));
+      //
+      //  }
+
+
     }
 }
