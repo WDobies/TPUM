@@ -7,9 +7,8 @@ namespace ServerLogic
 {
     public abstract class IShop
     {
-        public abstract List<IProduct> GetAllProducts();
-        public abstract List<IProduct> GetProductsOfType(int type);
-        public abstract string ParseAllProductsToXML();
+        public abstract string GetAllProducts();
+        public abstract string GetProductsOfType(int type);
         public abstract bool Buy(Guid id);
         public abstract event EventHandler<CountChangedEventArgs> CountChanged;
 
@@ -26,17 +25,18 @@ namespace ServerLogic
             this.productsBase = dataManager.ProductsBase;
         }
 
-        public override List<IProduct> GetAllProducts()
+        public override string GetAllProducts()
         {
             List<IProduct> products = new List<IProduct>();
             foreach (ServerData.IProduct item in productsBase.Products)
             {
                 products.Add(new Product(item.Name, item.Price, item.Count, item.ID, item.Description));
             }
-            return products;
+
+            return ParseProductsToXML(products);
         }
 
-        public override List<IProduct> GetProductsOfType(int type)
+        public override string GetProductsOfType(int type)
         {
             List<IProduct> products = new List<IProduct>();
             foreach (ServerData.IProduct item in productsBase.Products)
@@ -46,7 +46,8 @@ namespace ServerLogic
                     products.Add(new Product(item.Name, item.Price, item.Count, item.ID, item.Description));
                 }
             }
-            return products;
+
+            return ParseProductsToXML(products);
         }
 
 
@@ -65,11 +66,11 @@ namespace ServerLogic
             return true;
         }
 
-        public override string ParseAllProductsToXML()
+        private string ParseProductsToXML(List<IProduct> products)
         {
             string xml = "";
             Serializer serializer = new Serializer();
-            foreach (IProduct item in GetAllProducts())
+            foreach (IProduct item in products)
             {
                 ProductXML p = new ProductXML(item.Name, item.Price, item.Count, item.ID, item.Description);
                 serializer.products.Add(p);

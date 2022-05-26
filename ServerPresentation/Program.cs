@@ -12,13 +12,12 @@ namespace ServerPresentation
         {
             //test serialize 
             IServerLogicManager logicManager = IServerLogicManager.Create();
-            string ProductstoXML = logicManager.Shop.ParseAllProductsToXML();
 
-            //test serialize deserialize
-            Serializer serializer = new Serializer();
-            serializer.DeserializeXML(ProductstoXML);
-            Console.WriteLine(serializer.products[3].Name);
-            
+            // TEST serialize deserialize
+            //string ProductstoXML = logicManager.Shop.ParseAllProductsToXML();
+            //Serializer serializer = new Serializer();
+            //serializer.DeserializeXML(ProductstoXML);
+            //Console.WriteLine(serializer.products[3].Name);
             //
             
 
@@ -33,8 +32,9 @@ namespace ServerPresentation
 
                         if (data == "GetProductsOfType0")
                         {
-                            List<IProduct> products = logicManager.Shop.GetProductsOfType(0);
                             // TODO: SendAsync("products as XML")
+                            //List<IProduct> products = logicManager.Shop.GetProductsOfType(0);
+                            //await WebSocketServer.CurrentConnection.SendAsync(message);
                         }
                     };
                 }));
@@ -42,5 +42,6 @@ namespace ServerPresentation
 
             Console.ReadKey();
         }
+
     }
 }
