@@ -37,6 +37,21 @@ namespace ServerPresentation
                             //List<IProduct> products = logicManager.Shop.GetProductsOfType(0);
                             //await WebSocketServer.CurrentConnection.SendAsync(message);
                         }
+                        if (data.ToString() == "GetProductsOfType0")
+                        {
+                            await Program.server.SendAsync(logicManager.Shop.GetProductsOfType(0));
+                            Console.WriteLine($"[Server]: {logicManager.Shop.GetProductsOfType(0)}");
+                        }
+                        if (data.ToString() == "GetProductsOfType1")
+                        {
+                            await Program.server.SendAsync(logicManager.Shop.GetProductsOfType(1));
+                            Console.WriteLine($"[Server]: {logicManager.Shop.GetProductsOfType(1)}");
+                        }
+                        if (data.ToString() == "GetProductsOfType2")
+                        {
+                            await Program.server.SendAsync(logicManager.Shop.GetProductsOfType(2));
+                            Console.WriteLine($"[Server]: {logicManager.Shop.GetProductsOfType(2)}");
+                        }
                     };
                 }));
 

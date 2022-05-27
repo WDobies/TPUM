@@ -77,7 +77,7 @@ namespace ServerPresentation
 
             private void ServerMessageLoop(WebSocket ws)
             {
-                byte[] buffer = new byte[1024];
+                byte[] buffer = new byte[9192];
                 while (true)
                 {
                     ArraySegment<byte> _segments = new ArraySegment<byte>(buffer);
