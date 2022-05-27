@@ -2,12 +2,6 @@
 
 namespace Data
 {
-    public enum ProductType
-    {
-        Laptop,
-        Smartphone,
-        Accessories
-    }
 
     public interface IProduct
     {
@@ -15,8 +9,6 @@ namespace Data
         float Price { get; }        
         string Description { get; }
         int Count { get; set;}
-        ProductType Type { get; }
         Guid ID { get; }
-        string GenerateDescription();
     }
 }
