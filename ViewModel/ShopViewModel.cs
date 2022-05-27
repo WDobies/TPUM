@@ -21,8 +21,8 @@ namespace ViewModel
             Model.IModelManager modelManager = Model.IModelManager.Create();
             model= modelManager.ShopModel;
 
-            model.ChangeProductList(SelectedListIndex);
-            CopyModelAllProducts();
+            //model.ChangeProductList(SelectedListIndex);
+            //CopyModelAllProducts();
 
             model.NewList += OnNewList;
 

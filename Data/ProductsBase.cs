@@ -9,6 +9,9 @@ namespace Data
     public abstract class IProductsBase
     {
         public abstract List<IProduct> Products { get; }
+        public abstract void GetProductsOfType(int type);
+
+        public abstract event EventHandler<NewListEventArgs> NewList;
     }
 
     internal class ProductsBase: IProductsBase
@@ -54,8 +57,17 @@ namespace Data
         {
             Uri uri = new Uri("ws://localhost:9696");
             client = await WebSocketClient.Connect(uri, message => Console.WriteLine("Connected"));
-      
+
+            client.onMessage = ParseMessage;
         }
+        private void ParseMessage(string message)
+        {
+            if(message != null) // Tymczasowe sprawdzanie czy to jest XML
+            {
+                XML_ToNewList(message);
+            }
+        }
+
         public async void InitializeConnection()
         {
             await Connect();
@@ -65,5 +77,27 @@ namespace Data
         {
             await client.SendAsync(message);
         }
+
+        public async override void GetProductsOfType(int type)
+        {
+            await Send("GetProductsOfType" + type.ToString());
+        }
+
+        public override event EventHandler<NewListEventArgs> NewList;
+
+        public void XML_ToNewList(string message)
+        {
+            // TODO: XML from message to List<IProduct> products
+
+            // TEMP
+            List<IProduct> products = new List<IProduct>();
+            products.Add(new Laptop("Legion", 4800, 10, ProductType.Laptop, 512, 16));
+            products.Add(new Laptop("Legion", 5000, 10, ProductType.Laptop, 1000, 16));
+            // END TEMP
+
+            EventHandler<NewListEventArgs> handler = NewList;
+            handler?.Invoke(this, new NewListEventArgs(products));
+        }
+
     }
 }

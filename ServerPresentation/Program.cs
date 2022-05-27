@@ -25,16 +25,25 @@ namespace ServerPresentation
             Task server = Task.Run(async () => await WebSocketServer.Server(uri.Port,
                 _ws =>
                 {
-                    Program.server = _ws; Program.server.onMessage = (data) =>
+                    Program.server = _ws; Program.server.onMessage = async (data) =>
                     {
                         //Console.WriteLine("\nrecived:" + parseTEST);
                         Console.WriteLine(data.ToString());
 
                         if (data == "GetProductsOfType0")
                         {
-                            // TODO: SendAsync("products as XML")
-                            //List<IProduct> products = logicManager.Shop.GetProductsOfType(0);
-                            //await WebSocketServer.CurrentConnection.SendAsync(message);
+                            await Program.server.SendAsync(logicManager.Shop.GetProductsOfType(0));
+                            Console.WriteLine($"[Server]: {logicManager.Shop.GetProductsOfType(0)}");
+                        }
+                        if (data == "GetProductsOfType1")
+                        {
+                            await Program.server.SendAsync(logicManager.Shop.GetProductsOfType(1));
+                            Console.WriteLine($"[Server]: {logicManager.Shop.GetProductsOfType(1)}");
+                        }
+                        if (data == "GetProductsOfType2")
+                        {
+                            await Program.server.SendAsync(logicManager.Shop.GetProductsOfType(2));
+                            Console.WriteLine($"[Server]: {logicManager.Shop.GetProductsOfType(2)}");
                         }
                     };
                 }));
@@ -42,6 +51,5 @@ namespace ServerPresentation
 
             Console.ReadKey();
         }
-
     }
 }

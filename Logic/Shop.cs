@@ -24,7 +24,7 @@ namespace Logic
             this.dataManager = IDataManager.Create();
             this.productsBase = dataManager.ProductsBase;
 
-            dataManager.NewList += OnNewList;
+            dataManager.ProductsBase.NewList += OnNewList;
         }
 
         public override List<IProduct> GetAllProducts()
@@ -40,8 +40,9 @@ namespace Logic
         public override void GetProductsOfType(int type)
         {
             // TEMP
-            dataManager.XML_ToNewList("TEMP");
+            //dataManager.XML_ToNewList("TEMP");
             // TODO: SendAsync("GetProductsOfType+type")
+            dataManager.ProductsBase.GetProductsOfType(type);
         }
 
         public override event EventHandler<CountChangedEventArgs> CountChanged;

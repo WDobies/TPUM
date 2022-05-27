@@ -12,10 +12,6 @@ namespace Data
         {
             return new DataManager(productsBase);
         }
-        public abstract event EventHandler<NewListEventArgs> NewList;
-
-        // TEMP In IDataManager
-        public abstract void XML_ToNewList(string message);
     }
     internal class DataManager: IDataManager
     {
@@ -24,21 +20,5 @@ namespace Data
             ProductsBase = productsBase ?? new ProductsBase();
         }
         public override IProductsBase ProductsBase { get; }
-
-        public override void XML_ToNewList(string message)
-        {
-            // TODO: XML from message to List<IProduct> products
-
-            // TEMP
-            List<IProduct> products = new List<IProduct>();
-            products.Add(new Laptop("Legion", 4800, 10, ProductType.Laptop, 512, 16));
-            products.Add(new Laptop("Legion", 5000, 10, ProductType.Laptop, 1000, 16));
-            // END TEMP
-
-            EventHandler<NewListEventArgs> handler = NewList;
-            handler?.Invoke(this, new NewListEventArgs(products));
-        }
-
-        public override event EventHandler<NewListEventArgs> NewList;
     }
 }
