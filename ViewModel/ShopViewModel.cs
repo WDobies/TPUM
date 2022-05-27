@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace ViewModel
@@ -14,10 +15,14 @@ namespace ViewModel
 
         public IDialogService dialogService { get => _dialogService; set { _dialogService = value; }}
 
-        public ObservableCollection<Product> Products { get; } = new ObservableCollection<Product>();
+        public ObservableCollection<Product> Products { get; }
 
         public ShopViewModel()
         {
+            Products = new ObservableCollection<Product>();
+            object lockObj = new object();
+            BindingOperations.EnableCollectionSynchronization(Products, lockObj);
+
             Model.IModelManager modelManager = Model.IModelManager.Create();
             model= modelManager.ShopModel;
 
@@ -39,10 +44,11 @@ namespace ViewModel
 
         public void CopyModelAllProducts()
         {
+            
             Products.Clear();
             foreach (Model.IProduct product in model.Products)
                 Products.Add(new ViewModel.Product(product));
-
+            
             foreach (Product product in Products)
                 product.BuyEvent += OnBuy;
         }

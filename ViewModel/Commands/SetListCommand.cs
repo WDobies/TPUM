@@ -40,7 +40,7 @@ namespace ViewModel
         {
             viewModel.SelectedListIndex = listIndex;
             viewModel.model.ChangeProductList(viewModel.SelectedListIndex);
-            viewModel.CopyModelAllProducts();
+            //viewModel.CopyModelAllProducts();
         }
     }
 }

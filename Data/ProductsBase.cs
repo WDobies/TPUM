@@ -54,21 +54,26 @@ namespace Data
             Products.Add(new Accessories("Accessories 07", 60, 1, ProductType.Accessories, "LG"));
             Products.Add(new Accessories("Accessories 08", 90, 4, ProductType.Accessories, "ABCD"));
         }
+
         public async Task Connect()
         {
             Uri uri = new Uri("ws://localhost:9696");
             client = await WebSocketClient.Connect(uri, message => Console.WriteLine("Connected"));
 
-            client.onMessage = (data) =>
+            client.onMessage = async (data) =>
             {
                 Debug.WriteLine(data.ToString());
+                //XML_ToNewList(data);
+                ParseMessage(data.ToString());
             };
         }
-        private void ParseMessage(string message)
+
+        private async Task ParseMessage(string message)
         {
             if(message != null) // Tymczasowe sprawdzanie czy to jest XML
             {
-                XML_ToNewList(message);
+                if(message != "HELLO")
+                    XML_ToNewList(message);
             }
         }
 
@@ -77,6 +82,7 @@ namespace Data
             await Connect();
             await Send("HELLO");
         }
+
         public async Task Send(string message)
         {
             await client.SendAsync(message);
@@ -92,11 +98,15 @@ namespace Data
         public void XML_ToNewList(string message)
         {
             // TODO: XML from message to List<IProduct> products
+            Serializer serializer = new Serializer();
+            serializer.DeserializeXML(message);
+            Console.WriteLine(serializer.products[0].Name);
 
             // TEMP
             List<IProduct> products = new List<IProduct>();
-            products.Add(new Laptop("Legion", 4800, 10, ProductType.Laptop, 512, 16));
-            products.Add(new Laptop("Legion", 5000, 10, ProductType.Laptop, 1000, 16));
+            products.Add(new Laptop(serializer.products[0].Name, 4800, 10, ProductType.Laptop, 512, 16));
+            products.Add(new Laptop(serializer.products[1].Name, 5000, 10, ProductType.Laptop, 1000, 16));
+            products.Add(new Laptop(serializer.products[2].Name, 5000, 10, ProductType.Laptop, 1000, 16));
             // END TEMP
 
             EventHandler<NewListEventArgs> handler = NewList;

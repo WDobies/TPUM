@@ -32,7 +32,7 @@ namespace ServerPresentation
 
                         if (data.ToString() == "HELLO")
                         {
-                            await Program.server.SendAsync("-----------------------------HELLO----------------");
+                            await Program.server.SendAsync("HELLO");
                             // TODO: SendAsync("products as XML")
                             //List<IProduct> products = logicManager.Shop.GetProductsOfType(0);
                             //await WebSocketServer.CurrentConnection.SendAsync(message);
