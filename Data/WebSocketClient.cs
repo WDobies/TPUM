@@ -74,7 +74,7 @@ namespace Data
             {
                 try
                 {
-                    byte[] buffer = new byte[1024];
+                    byte[] buffer = new byte[9192];
                     while (true)
                     {
                         ArraySegment<byte> segment = new ArraySegment<byte>(buffer);
