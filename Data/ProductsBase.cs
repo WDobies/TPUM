@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,7 +59,10 @@ namespace Data
             Uri uri = new Uri("ws://localhost:9696");
             client = await WebSocketClient.Connect(uri, message => Console.WriteLine("Connected"));
 
-            client.onMessage = ParseMessage;
+            client.onMessage = (data) =>
+            {
+                Debug.WriteLine(data.ToString());
+            };
         }
         private void ParseMessage(string message)
         {
@@ -71,7 +75,7 @@ namespace Data
         public async void InitializeConnection()
         {
             await Connect();
-            await Send("hello from client");
+            await Send("HELLO");
         }
         public async Task Send(string message)
         {
