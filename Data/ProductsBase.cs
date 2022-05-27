@@ -13,13 +13,14 @@ namespace Data
 
     internal class ProductsBase: IProductsBase
     {
-        WebSocketConnection _wclient = null;
+        WebSocketConnection client = null;
         
         override public List<IProduct> Products { get; }
 
         public ProductsBase()
         {
-            
+            InitializeConnection();
+
             Products = new List<IProduct>();
 
             Products.Add(new Laptop("Laptop 01", 2000, 55, ProductType.Laptop, 256, 2));
@@ -49,13 +50,20 @@ namespace Data
             Products.Add(new Accessories("Accessories 07", 60, 1, ProductType.Accessories, "LG"));
             Products.Add(new Accessories("Accessories 08", 90, 4, ProductType.Accessories, "ABCD"));
         }
-      //  public async Task connect()
-      //  {
-      //      Uri uri = new Uri("ws://localhost:6966");
-      //      _wclient = await WebSocketClient.Connect(uri, message => Console.WriteLine(message));
-      //
-      //  }
-
-
+        public async Task Connect()
+        {
+            Uri uri = new Uri("ws://localhost:9696");
+            client = await WebSocketClient.Connect(uri, message => Console.WriteLine("Connected"));
+      
+        }
+        public async void InitializeConnection()
+        {
+            await Connect();
+            await Send("hello from client");
+        }
+        public async Task Send(string message)
+        {
+            await client.SendAsync(message);
+        }
     }
 }
