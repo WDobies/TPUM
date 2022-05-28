@@ -16,4 +16,14 @@ namespace ServerLogic
         public Guid ID { get; }
         public int Value { get; }
     }
+
+    public class IncorrectOrderEventArgs : EventArgs
+    {
+        public IncorrectOrderEventArgs(Guid id)
+        {
+            ID = id;
+        }
+
+        public Guid ID { get; }
+    }
 }

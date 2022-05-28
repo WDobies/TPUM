@@ -11,8 +11,11 @@ namespace Data
     {
         public abstract List<IProduct> Products { get; }
         public abstract void GetProductsOfType(int type);
+        public abstract void Buy(Guid id);
+
 
         public abstract event EventHandler<NewListEventArgs> NewList;
+        public abstract event EventHandler<CountChangedEventArgs> CountChanged;
     }
 
     internal class ProductsBase: IProductsBase
@@ -50,8 +53,24 @@ namespace Data
         {
             if(message != null) // Tymczasowe sprawdzanie czy to jest XML
             {
-                if(message != "HELLO")
+                if(message.Contains("CountChanged"))
+                {
+                    string countChangedStr = message.Substring("CountChanged".Length);
+                    string[] parts = countChangedStr.Split("/");
+                    EventHandler<CountChangedEventArgs> handler = CountChanged;
+                    handler?.Invoke(this, new CountChangedEventArgs(Guid.Parse(parts[1]), int.Parse(parts[0])));
+                    return;
+                }
+                if (message.Contains("IncorrectOrder"))
+                {
+                    // TODO: IncorrectOrder
+                    return;
+                }
+                if (message.Contains("xml"))
+                {
                     XML_ToNewList(message);
+                    return;
+                }
             }
         }
 
@@ -72,6 +91,7 @@ namespace Data
         }
 
         public override event EventHandler<NewListEventArgs> NewList;
+        public override event EventHandler<CountChangedEventArgs> CountChanged;
 
         public void XML_ToNewList(string message)
         {
@@ -91,5 +111,9 @@ namespace Data
             handler?.Invoke(this, new NewListEventArgs(products));
         }
 
+        public override void Buy(Guid id)
+        {
+            Send("Buy"+id.ToString());
+        }
     }
 }

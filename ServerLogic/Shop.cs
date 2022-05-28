@@ -11,18 +11,21 @@ namespace ServerLogic
         public abstract string GetProductsOfType(int type);
         public abstract bool Buy(Guid id);
         public abstract event EventHandler<CountChangedEventArgs> CountChanged;
+        public abstract event EventHandler<IncorrectOrderEventArgs> IncorrectOrder;
 
     }
-    public class Shop: IShop
+    public class Shop: IShop, IObserver<ServerData.IProduct>
     {
         private IServerDataManager dataManager;
         private IProductsBase productsBase;
 
+        private IDisposable unsubscriber;
 
         public Shop()
         {
             this.dataManager = IServerDataManager.Create();
             this.productsBase = dataManager.ProductsBase;
+            productsBase.Subscribe(this);
         }
 
         public override string GetAllProducts()
@@ -52,18 +55,18 @@ namespace ServerLogic
 
 
         public override event EventHandler<CountChangedEventArgs> CountChanged;
+        public override event EventHandler<IncorrectOrderEventArgs> IncorrectOrder;
 
         public override bool Buy(Guid id)
         {
             ServerData.IProduct product = productsBase.Products.FirstOrDefault(x => x.ID == id);
 
-            if (product.Count <= 0)
-                return false;
+            if (productsBase.Buy(product))
+                return true;
 
-            product.Count--;
-            EventHandler<CountChangedEventArgs> handler = CountChanged;
-            handler?.Invoke(this, new CountChangedEventArgs(id, product.Count));
-            return true;
+            EventHandler<IncorrectOrderEventArgs> handler = IncorrectOrder;
+            handler?.Invoke(this, new IncorrectOrderEventArgs(id));
+            return false;
         }
 
         private string ParseProductsToXML(List<IProduct> products)
@@ -77,6 +80,26 @@ namespace ServerLogic
             }
             xml += serializer.ParseToXML();
             return xml;
+        }
+
+        public void OnCompleted()
+        {
+            this.Unsunscribe();
+        }
+
+        public void OnError(Exception error)
+        {
+        }
+
+        public void OnNext(ServerData.IProduct value)
+        {
+            EventHandler<CountChangedEventArgs> handler = CountChanged;
+            handler?.Invoke(this, new CountChangedEventArgs(value.ID, value.Count));
+        }
+
+        private void Unsunscribe()
+        {
+            unsubscriber.Dispose();
         }
     }
 }

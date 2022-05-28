@@ -45,7 +45,8 @@ namespace Model
         private void OnCountChanged(object sender, Logic.CountChangedEventArgs e)
         {
             IProduct product = Products.FirstOrDefault(x => x.ID == e.ID);
-            product.Count = e.Value;
+            if(product != null)
+                product.Count = e.Value;
         }
 
         public override event EventHandler<NewListEventArgs> NewList;

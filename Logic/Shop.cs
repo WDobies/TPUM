@@ -25,6 +25,7 @@ namespace Logic
             this.productsBase = dataManager.ProductsBase;
 
             dataManager.ProductsBase.NewList += OnNewList;
+            dataManager.ProductsBase.CountChanged += OnCountChanged;
         }
 
         public override List<IProduct> GetAllProducts()
@@ -47,16 +48,24 @@ namespace Logic
 
         public override event EventHandler<CountChangedEventArgs> CountChanged;
 
+        private void OnCountChanged(object sender, Data.CountChangedEventArgs e)
+        {
+            EventHandler<CountChangedEventArgs> handler = CountChanged;
+            handler?.Invoke(this, new CountChangedEventArgs(e.ID, e.Value));
+        }
+
         public override bool Buy(Guid id)
         {
-            Data.IProduct product = productsBase.Products.FirstOrDefault(x => x.ID == id);
+            dataManager.ProductsBase.Buy(id);
 
-            if (product.Count <= 0)
-                return false;
-
-            product.Count--;
-            EventHandler<CountChangedEventArgs> handler = CountChanged;
-            handler?.Invoke(this, new CountChangedEventArgs(id, product.Count));
+            //Data.IProduct product = productsBase.Products.FirstOrDefault(x => x.ID == id);
+            //
+            //if (product.Count <= 0)
+            //    return false;
+            //
+            //product.Count--;
+            //EventHandler<CountChangedEventArgs> handler = CountChanged;
+            //handler?.Invoke(this, new CountChangedEventArgs(id, product.Count));
             return true;
         }
 
