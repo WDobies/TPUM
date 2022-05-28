@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("ServerDataTEST")]
 namespace ServerData
 {
     internal class Smartphone: IProduct
