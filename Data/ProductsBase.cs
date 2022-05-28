@@ -15,6 +15,7 @@ namespace Data
 
 
         public abstract event EventHandler<NewListEventArgs> NewList;
+        public abstract event EventHandler<IncorrectOrderEventArgs> IncorrectOrder;
         public abstract event EventHandler<CountChangedEventArgs> CountChanged;
     }
 
@@ -63,7 +64,9 @@ namespace Data
                 }
                 if (message.Contains("IncorrectOrder"))
                 {
-                    // TODO: IncorrectOrder
+                    string countChangedStr = message.Substring("CountChanged".Length);
+                    EventHandler<IncorrectOrderEventArgs> handler = IncorrectOrder;
+                    handler?.Invoke(this, new IncorrectOrderEventArgs(Guid.Parse(countChangedStr)));
                     return;
                 }
                 if (message.Contains("xml"))
@@ -92,6 +95,7 @@ namespace Data
 
         public override event EventHandler<NewListEventArgs> NewList;
         public override event EventHandler<CountChangedEventArgs> CountChanged;
+        public override event EventHandler<IncorrectOrderEventArgs> IncorrectOrder;
 
         public void XML_ToNewList(string message)
         {

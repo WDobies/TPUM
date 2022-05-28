@@ -30,6 +30,7 @@ namespace ViewModel
             //CopyModelAllProducts();
 
             model.NewList += OnNewList;
+            model.IncorrectOrder += OnIncorrectOrder;
 
             SetLaptopList = new SetListCommand(this, 0);
             SetSmartphoneList = new SetListCommand(this, 1);
@@ -57,8 +58,12 @@ namespace ViewModel
 
         private void OnBuy(object sender, EventArgs e)
         {
-            if(model.Buy(((Product)sender).ID) == false)
-                AlertCommand.Execute(this);
+            model.Buy(((Product)sender).ID);
+        }
+
+        private void OnIncorrectOrder(object sender, Model.IncorrectOrderEventArgs e)
+        {
+            AlertCommand.Execute(this);
         }
 
         #region Commands

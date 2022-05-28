@@ -13,6 +13,7 @@ namespace Model
         public abstract void ChangeProductList(int productType);
         public abstract bool Buy(Guid id);
         public abstract event EventHandler<NewListEventArgs> NewList;
+        public abstract event EventHandler<IncorrectOrderEventArgs> IncorrectOrder;
     }
 
     internal class ShopModel : IShopModel 
@@ -28,6 +29,7 @@ namespace Model
             shop = logicManager.Shop;
             shop.CountChanged += OnCountChanged;
             shop.NewList += OnNewList;
+            shop.IncorrectOrder += OnIncorrectOrder;
 
             Products = new List<IProduct>();
         }
@@ -50,6 +52,7 @@ namespace Model
         }
 
         public override event EventHandler<NewListEventArgs> NewList;
+        public override event EventHandler<IncorrectOrderEventArgs> IncorrectOrder;
 
         private void OnNewList(object sender, Logic.NewListEventArgs e)
         {
@@ -62,6 +65,12 @@ namespace Model
 
             EventHandler<NewListEventArgs> handler = NewList;
             handler?.Invoke(this, new NewListEventArgs());
+        }
+
+        private void OnIncorrectOrder(object sender, Logic.IncorrectOrderEventArgs e)
+        {
+            EventHandler<IncorrectOrderEventArgs> handler = IncorrectOrder;
+            handler?.Invoke(this, new IncorrectOrderEventArgs(e.ID));
         }
     }
 }

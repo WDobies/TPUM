@@ -26,4 +26,13 @@ namespace Logic
 
         public List<IProduct> Products { get; }
     }
+    public class IncorrectOrderEventArgs : EventArgs
+    {
+        public IncorrectOrderEventArgs(Guid id)
+        {
+            ID = id;
+        }
+
+        public Guid ID { get; }
+    }
 }

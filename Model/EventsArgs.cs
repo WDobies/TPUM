@@ -22,4 +22,14 @@ namespace Model
         public NewListEventArgs()
         { }
     }
+
+    public class IncorrectOrderEventArgs : EventArgs
+    {
+        public IncorrectOrderEventArgs(Guid id)
+        {
+            ID = id;
+        }
+
+        public Guid ID { get; }
+    }
 }

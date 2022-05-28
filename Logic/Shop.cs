@@ -10,8 +10,9 @@ namespace Logic
         public abstract List<IProduct> GetAllProducts();
         public abstract void GetProductsOfType(int type);
         public abstract bool Buy(Guid id);
-        public abstract event EventHandler<CountChangedEventArgs> CountChanged;
         public abstract event EventHandler<NewListEventArgs> NewList;
+        public abstract event EventHandler<IncorrectOrderEventArgs> IncorrectOrder;
+        public abstract event EventHandler<CountChangedEventArgs> CountChanged;
     }
     public class Shop: IShop
     {
@@ -26,6 +27,7 @@ namespace Logic
 
             dataManager.ProductsBase.NewList += OnNewList;
             dataManager.ProductsBase.CountChanged += OnCountChanged;
+            dataManager.ProductsBase.IncorrectOrder += OnIncorrectOrder;
         }
 
         public override List<IProduct> GetAllProducts()
@@ -70,6 +72,13 @@ namespace Logic
         }
 
         public override event EventHandler<NewListEventArgs> NewList;
+        public override event EventHandler<IncorrectOrderEventArgs> IncorrectOrder;
+
+        private void OnIncorrectOrder(object sender, Data.IncorrectOrderEventArgs e)
+        {
+            EventHandler<IncorrectOrderEventArgs> handler = IncorrectOrder;
+            handler?.Invoke(this, new IncorrectOrderEventArgs(e.ID));
+        }
 
         private void OnNewList(object sender, Data.NewListEventArgs e)
         {
