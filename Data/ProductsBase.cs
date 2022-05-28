@@ -64,7 +64,7 @@ namespace Data
                 }
                 if (message.Contains("IncorrectOrder"))
                 {
-                    string countChangedStr = message.Substring("CountChanged".Length);
+                    string countChangedStr = message.Substring("IncorrectOrder".Length);
                     EventHandler<IncorrectOrderEventArgs> handler = IncorrectOrder;
                     handler?.Invoke(this, new IncorrectOrderEventArgs(Guid.Parse(countChangedStr)));
                     return;
