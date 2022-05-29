@@ -9,7 +9,7 @@ namespace ServerData
     {
         public abstract List<IProduct> Products { get; }
 
-        public abstract bool Buy(IProduct product);
+        public abstract bool TryDecrease(IProduct product);
 
         public abstract IDisposable Subscribe(IObserver<IProduct> observer);
     }
@@ -53,7 +53,7 @@ namespace ServerData
             //Products.Add(new Accessories("Accessories 08", 90, 4, ProductType.Accessories, "ABCD"));
         }
 
-        public override bool Buy(IProduct product)
+        public override bool TryDecrease(IProduct product)
         {
             if (product.Count <= 0)
                 return false;

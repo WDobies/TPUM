@@ -61,7 +61,7 @@ namespace ServerLogic
         {
             ServerData.IProduct product = productsBase.Products.FirstOrDefault(x => x.ID == id);
 
-            if (productsBase.Buy(product))
+            if (productsBase.TryDecrease(product))
                 return true;
 
             EventHandler<IncorrectOrderEventArgs> handler = IncorrectOrder;
