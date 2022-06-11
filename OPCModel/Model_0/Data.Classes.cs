@@ -34,7 +34,7 @@ using System.Xml;
 using System.Runtime.Serialization;
 using Opc.Ua;
 
-namespace 
+namespace Data
 {
     #region ProductState Class
     #if (!OPCUA_EXCLUDE_ProductState)
@@ -58,7 +58,7 @@ namespace
         /// </summary>
         protected override NodeId GetDefaultTypeDefinitionId(NamespaceTable namespaceUris)
         {
-            return Opc.Ua.NodeId.Create(.ObjectTypes.Product, .Namespaces.Data, namespaceUris);
+            return Opc.Ua.NodeId.Create(Data.ObjectTypes.Product, Data.Namespaces.Data, namespaceUris);
         }
 
         #if (!OPCUA_EXCLUDE_InitializationStrings)
@@ -254,7 +254,7 @@ namespace
 
             switch (browseName.Name)
             {
-                case .BrowseNames.Name:
+                case Data.BrowseNames.Name:
                 {
                     if (createOrReplace)
                     {
@@ -275,7 +275,7 @@ namespace
                     break;
                 }
 
-                case .BrowseNames.ID:
+                case Data.BrowseNames.ID:
                 {
                     if (createOrReplace)
                     {
@@ -296,7 +296,7 @@ namespace
                     break;
                 }
 
-                case .BrowseNames.Count:
+                case Data.BrowseNames.Count:
                 {
                     if (createOrReplace)
                     {
@@ -317,7 +317,7 @@ namespace
                     break;
                 }
 
-                case .BrowseNames.Description:
+                case Data.BrowseNames.Description:
                 {
                     if (createOrReplace)
                     {
@@ -338,7 +338,7 @@ namespace
                     break;
                 }
 
-                case .BrowseNames.Price:
+                case Data.BrowseNames.Price:
                 {
                     if (createOrReplace)
                     {

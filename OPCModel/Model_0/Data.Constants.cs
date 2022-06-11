@@ -35,7 +35,7 @@ using System.Xml;
 using System.Runtime.Serialization;
 using Opc.Ua;
 
-namespace 
+namespace Data
 {
     #region ObjectType Identifiers
     /// <summary>
@@ -98,7 +98,7 @@ namespace
         /// <summary>
         /// The identifier for the Product ObjectType.
         /// </summary>
-        public static readonly ExpandedNodeId Product = new ExpandedNodeId(.ObjectTypes.Product, .Namespaces.Data);
+        public static readonly ExpandedNodeId Product = new ExpandedNodeId(Data.ObjectTypes.Product, Data.Namespaces.Data);
     }
     #endregion
 
@@ -113,27 +113,27 @@ namespace
         /// <summary>
         /// The identifier for the Product_Name Variable.
         /// </summary>
-        public static readonly ExpandedNodeId Product_Name = new ExpandedNodeId(.Variables.Product_Name, .Namespaces.Data);
+        public static readonly ExpandedNodeId Product_Name = new ExpandedNodeId(Data.Variables.Product_Name, Data.Namespaces.Data);
 
         /// <summary>
         /// The identifier for the Product_ID Variable.
         /// </summary>
-        public static readonly ExpandedNodeId Product_ID = new ExpandedNodeId(.Variables.Product_ID, .Namespaces.Data);
+        public static readonly ExpandedNodeId Product_ID = new ExpandedNodeId(Data.Variables.Product_ID, Data.Namespaces.Data);
 
         /// <summary>
         /// The identifier for the Product_Count Variable.
         /// </summary>
-        public static readonly ExpandedNodeId Product_Count = new ExpandedNodeId(.Variables.Product_Count, .Namespaces.Data);
+        public static readonly ExpandedNodeId Product_Count = new ExpandedNodeId(Data.Variables.Product_Count, Data.Namespaces.Data);
 
         /// <summary>
         /// The identifier for the Product_Description Variable.
         /// </summary>
-        public static readonly ExpandedNodeId Product_Description = new ExpandedNodeId(.Variables.Product_Description, .Namespaces.Data);
+        public static readonly ExpandedNodeId Product_Description = new ExpandedNodeId(Data.Variables.Product_Description, Data.Namespaces.Data);
 
         /// <summary>
         /// The identifier for the Product_Price Variable.
         /// </summary>
-        public static readonly ExpandedNodeId Product_Price = new ExpandedNodeId(.Variables.Product_Price, .Namespaces.Data);
+        public static readonly ExpandedNodeId Product_Price = new ExpandedNodeId(Data.Variables.Product_Price, Data.Namespaces.Data);
     }
     #endregion
 
@@ -184,7 +184,7 @@ namespace
     public static partial class Namespaces
     {
         /// <summary>
-        /// The URI for the Data namespace (.NET code namespace is '').
+        /// The URI for the Data namespace (.NET code namespace is 'Data').
         /// </summary>
         public const string Data = "http:/TPUM/Model/";
 
