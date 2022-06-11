@@ -1,7 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<q1:ModelDesign xmlns:cas="http://cas.eu/UA/CommServer/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns="http://opcfoundation.org/UA/" TargetNamespace="http:/TPUM/Model/" xmlns:q1="http://opcfoundation.org/UA/ModelDesign.xsd">
+<q1:ModelDesign xmlns:cas="http:/TPUM/Model/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns="http://opcfoundation.org/UA/" TargetNamespace="http:/TPUM/Model/" xmlns:q1="http://opcfoundation.org/UA/ModelDesign.xsd">
   <q1:Namespaces>
-    <q1:Namespace Name="cas" XmlPrefix="cas">http://cas.eu/UA/CommServer/</q1:Namespace>
+    <q1:Namespace Name="Data" XmlPrefix="cas">http:/TPUM/Model/</q1:Namespace>
     <q1:Namespace Name="OpcUa" Prefix="Opc.Ua" XmlNamespace="http://opcfoundation.org/UA/2008/02/Types.xsd">http://opcfoundation.org/UA/</q1:Namespace>
   </q1:Namespaces>
+  <q1:ObjectType SymbolicName="cas:Product" IsAbstract="true">
+    <q1:BrowseName>Product</q1:BrowseName>
+    <q1:Children>
+      <q1:Property SymbolicName="cas:Name" DataType="String">
+        <q1:BrowseName>Name</q1:BrowseName>
+      </q1:Property>
+      <q1:Property SymbolicName="cas:ID" DataType="Guid">
+        <q1:BrowseName>ID</q1:BrowseName>
+      </q1:Property>
+      <q1:Property SymbolicName="cas:Count" DataType="Integer">
+        <q1:BrowseName>Count</q1:BrowseName>
+      </q1:Property>
+      <q1:Property SymbolicName="cas:Description" DataType="String">
+        <q1:BrowseName>Description</q1:BrowseName>
+      </q1:Property>
+      <q1:Property SymbolicName="cas:Price" DataType="Float">
+        <q1:BrowseName>Price</q1:BrowseName>
+      </q1:Property>
+    </q1:Children>
+  </q1:ObjectType>
 </q1:ModelDesign>

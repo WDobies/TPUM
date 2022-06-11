@@ -1,1 +1,6 @@
- 
+Product,1,ObjectType
+Product_Name,2,Variable
+Product_ID,3,Variable
+Product_Count,4,Variable
+Product_Description,5,Variable
+Product_Price,6,Variable
