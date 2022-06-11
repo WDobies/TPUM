@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<q1:ModelDesign xmlns:cas="http://cas.eu/UA/CommServer/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns="http://opcfoundation.org/UA/" TargetNamespace="http:/TPUM/Model/" xmlns:q1="http://opcfoundation.org/UA/ModelDesign.xsd">
+  <q1:Namespaces>
+    <q1:Namespace Name="cas" XmlPrefix="cas">http://cas.eu/UA/CommServer/</q1:Namespace>
+    <q1:Namespace Name="OpcUa" Prefix="Opc.Ua" XmlNamespace="http://opcfoundation.org/UA/2008/02/Types.xsd">http://opcfoundation.org/UA/</q1:Namespace>
+  </q1:Namespaces>
+</q1:ModelDesign>
