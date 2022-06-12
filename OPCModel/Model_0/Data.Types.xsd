@@ -7,4 +7,6 @@
 >
   <xs:import namespace="http://opcfoundation.org/UA/2008/02/Types.xsd" />
 
+  <xs:element name="Product" type="ua:Variant" />
+
 </xs:schema>

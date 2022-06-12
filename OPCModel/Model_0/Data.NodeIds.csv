@@ -1,1 +1,3 @@
-Product,1,ObjectType
+Data_BinarySchema,7,Variable
+Data_XmlSchema,11,Variable
+Product,1,DataType

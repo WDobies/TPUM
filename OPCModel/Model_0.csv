@@ -1,6 +1,14 @@
-Product,1,ObjectType
+Product,1,DataType
 Product_Name,2,Variable
 Product_ID,3,Variable
 Product_Count,4,Variable
 Product_Description,5,Variable
 Product_Price,6,Variable
+Data_BinarySchema,7,Variable
+Data_BinarySchema_DataTypeVersion,8,Variable
+Data_BinarySchema_NamespaceUri,9,Variable
+Data_BinarySchema_Deprecated,10,Variable
+Data_XmlSchema,11,Variable
+Data_XmlSchema_DataTypeVersion,12,Variable
+Data_XmlSchema_NamespaceUri,13,Variable
+Data_XmlSchema_Deprecated,14,Variable

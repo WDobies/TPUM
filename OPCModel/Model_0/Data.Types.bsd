@@ -8,4 +8,7 @@
 >
   <opc:Import Namespace="http://opcfoundation.org/UA/" Location="Opc.Ua.BinarySchema.bsd"/>
 
+  <opc:OpaqueType Name="Product">
+  </opc:OpaqueType>
+
 </opc:TypeDictionary>

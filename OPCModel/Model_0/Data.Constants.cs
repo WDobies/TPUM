@@ -37,16 +37,16 @@ using Opc.Ua;
 
 namespace Data
 {
-    #region ObjectType Identifiers
+    #region DataType Identifiers
     /// <summary>
-    /// A class that declares constants for all ObjectTypes in the Model Design.
+    /// A class that declares constants for all DataTypes in the Model Design.
     /// </summary>
     /// <exclude />
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
-    public static partial class ObjectTypes
+    public static partial class DataTypes
     {
         /// <summary>
-        /// The identifier for the Product ObjectType.
+        /// The identifier for the Product DataType.
         /// </summary>
         public const uint Product = 1;
     }
@@ -84,21 +84,51 @@ namespace Data
         /// The identifier for the Product_Price Variable.
         /// </summary>
         public const uint Product_Price = 6;
+
+        /// <summary>
+        /// The identifier for the Data_BinarySchema Variable.
+        /// </summary>
+        public const uint Data_BinarySchema = 7;
+
+        /// <summary>
+        /// The identifier for the Data_BinarySchema_NamespaceUri Variable.
+        /// </summary>
+        public const uint Data_BinarySchema_NamespaceUri = 9;
+
+        /// <summary>
+        /// The identifier for the Data_BinarySchema_Deprecated Variable.
+        /// </summary>
+        public const uint Data_BinarySchema_Deprecated = 10;
+
+        /// <summary>
+        /// The identifier for the Data_XmlSchema Variable.
+        /// </summary>
+        public const uint Data_XmlSchema = 11;
+
+        /// <summary>
+        /// The identifier for the Data_XmlSchema_NamespaceUri Variable.
+        /// </summary>
+        public const uint Data_XmlSchema_NamespaceUri = 13;
+
+        /// <summary>
+        /// The identifier for the Data_XmlSchema_Deprecated Variable.
+        /// </summary>
+        public const uint Data_XmlSchema_Deprecated = 14;
     }
     #endregion
 
-    #region ObjectType Node Identifiers
+    #region DataType Node Identifiers
     /// <summary>
-    /// A class that declares constants for all ObjectTypes in the Model Design.
+    /// A class that declares constants for all DataTypes in the Model Design.
     /// </summary>
     /// <exclude />
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
-    public static partial class ObjectTypeIds
+    public static partial class DataTypeIds
     {
         /// <summary>
-        /// The identifier for the Product ObjectType.
+        /// The identifier for the Product DataType.
         /// </summary>
-        public static readonly ExpandedNodeId Product = new ExpandedNodeId(Data.ObjectTypes.Product, Data.Namespaces.Data);
+        public static readonly ExpandedNodeId Product = new ExpandedNodeId(Data.DataTypes.Product, Data.Namespaces.Data);
     }
     #endregion
 
@@ -134,6 +164,36 @@ namespace Data
         /// The identifier for the Product_Price Variable.
         /// </summary>
         public static readonly ExpandedNodeId Product_Price = new ExpandedNodeId(Data.Variables.Product_Price, Data.Namespaces.Data);
+
+        /// <summary>
+        /// The identifier for the Data_BinarySchema Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId Data_BinarySchema = new ExpandedNodeId(Data.Variables.Data_BinarySchema, Data.Namespaces.Data);
+
+        /// <summary>
+        /// The identifier for the Data_BinarySchema_NamespaceUri Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId Data_BinarySchema_NamespaceUri = new ExpandedNodeId(Data.Variables.Data_BinarySchema_NamespaceUri, Data.Namespaces.Data);
+
+        /// <summary>
+        /// The identifier for the Data_BinarySchema_Deprecated Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId Data_BinarySchema_Deprecated = new ExpandedNodeId(Data.Variables.Data_BinarySchema_Deprecated, Data.Namespaces.Data);
+
+        /// <summary>
+        /// The identifier for the Data_XmlSchema Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId Data_XmlSchema = new ExpandedNodeId(Data.Variables.Data_XmlSchema, Data.Namespaces.Data);
+
+        /// <summary>
+        /// The identifier for the Data_XmlSchema_NamespaceUri Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId Data_XmlSchema_NamespaceUri = new ExpandedNodeId(Data.Variables.Data_XmlSchema_NamespaceUri, Data.Namespaces.Data);
+
+        /// <summary>
+        /// The identifier for the Data_XmlSchema_Deprecated Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId Data_XmlSchema_Deprecated = new ExpandedNodeId(Data.Variables.Data_XmlSchema_Deprecated, Data.Namespaces.Data);
     }
     #endregion
 
@@ -148,6 +208,16 @@ namespace Data
         /// The BrowseName for the Count component.
         /// </summary>
         public const string Count = "Count";
+
+        /// <summary>
+        /// The BrowseName for the Data_BinarySchema component.
+        /// </summary>
+        public const string Data_BinarySchema = "Data";
+
+        /// <summary>
+        /// The BrowseName for the Data_XmlSchema component.
+        /// </summary>
+        public const string Data_XmlSchema = "Data";
 
         /// <summary>
         /// The BrowseName for the Description component.

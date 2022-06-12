@@ -4,7 +4,7 @@
     <q1:Namespace Name="Data" Prefix="Data" XmlPrefix="cas">http:/TPUM/Model/</q1:Namespace>
     <q1:Namespace Name="OpcUa" Prefix="Opc.Ua" XmlNamespace="http://opcfoundation.org/UA/2008/02/Types.xsd">http://opcfoundation.org/UA/</q1:Namespace>
   </q1:Namespaces>
-  <q1:ObjectType SymbolicName="cas:Product" IsAbstract="true">
+  <q1:DataType SymbolicName="cas:Product" IsAbstract="true">
     <q1:BrowseName>Product</q1:BrowseName>
     <q1:Children>
       <q1:Property SymbolicName="cas:Name" DataType="String">
@@ -23,5 +23,5 @@
         <q1:BrowseName>Price</q1:BrowseName>
       </q1:Property>
     </q1:Children>
-  </q1:ObjectType>
+  </q1:DataType>
 </q1:ModelDesign>
